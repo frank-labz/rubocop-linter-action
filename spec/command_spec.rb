@@ -54,6 +54,18 @@ describe Command do
         end
       end
 
+      context "when using bundle" do
+        let(:config_file) do
+          <<~YAML
+            bundle: true
+          YAML
+        end
+
+        it "add bundle exec to base command" do
+          expect(command.build).to eq("bundle exec rubocop --parallel -f json")
+        end
+      end
+
       context "with custom rubocop config file" do
         let(:config_file) do
           <<~YAML

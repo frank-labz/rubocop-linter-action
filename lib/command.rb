@@ -20,7 +20,11 @@ class Command
   end
 
   def base_command
-    "rubocop --parallel -f json"
+    if config && config["bundle"]
+      "bundle exec rubocop --parallel -f json"
+    else
+      "rubocop --parallel -f json"
+    end
   end
 
   def check_scope
